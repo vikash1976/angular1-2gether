@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-strict-di>
+<head>
+    <meta charset="utf-8" />
+    <title>AngularJS 1 and 2</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container" ng-controller="MainController as vm">
+        <h2>
+            {{vm.message}}
+        </h2>
+        <h2>
+            Its A1 consuming A1 directive
+        </h2>
+        <price-record price="vm.price" stock="{{vm.tick}}" last-price="{{vm.prevClosePrice}}">
+                    5 mins delayed prices.
+        </price-record>
+        <h3>
+            Its A1 consuming A1 service
+        </h3>
+        <h3>My Full Name</h3>
+        <h4>{{vm.myFullName}}</h43>
+        <h3>
+            Its A1 consuming A2 service
+        </h3>
+        <h3>My Formal Full Name</h3>
+        <h4>{{vm.myFullNameFromA2}}</h4>
+         <hr/>
+        <!-- component of A2 being consumed from A1 -->
+        <h2>
+            Its A1 consuming A2 directive
+        </h2>
+        <my-hero-detail [hero] = "vm.hero" [simple] = "vm.simple"></my-hero-detail>
+        <adder [operands]="vm.operands"></adder>
+        <!-- this shows change detetction -->
+        <button class="btn btn-primary" ng-click="vm.increment()">Click for Change Detection from A1 to A2</button>
+    <div>
+        <!-- 1. Load libraries -->
+        <script>document.write('<base href="' + document.location + '" />');</script>
+        <script src="node_modules/es6-shim/es6-shim.js"></script>
+        <script src="node_modules/reflect-metadata/Reflect.js"></script>
+        <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+        <script src="node_modules/systemjs/dist/system.src.js"></script>
+        <script src="node_modules/rxjs/bundles/Rx.js"></script>
+        
+        <script src="node_modules/angular2/bundles/angular2.js"></script>
+        <script src="node_modules/angular2/bundles/upgrade.js"></script>
+        <script src="node_modules/angular/angular.js"></script>
+         
+    
+    <script>
+      System.config({
+        packages: {        
+          app: {
+            format: 'register',
+            defaultExtension: 'js'
+          }
+        }
+      });
+      System.import('app/booter')
+            .then(null, console.error.bind(console));
+    </script>
+</body>
+
+</html>
