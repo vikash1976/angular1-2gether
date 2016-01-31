@@ -1,0 +1,24 @@
+
+<div class="row">
+                
+    <div class="col-md-3">
+        Cur Price: <input type="text" ng-model="price.price"/>
+    </div>
+    <div class="col-md-3">
+        Prev Price: <input type="text" ng-model="price.prevClosePrice"/>
+    </div>
+    <div class="col-md-2">
+        Code: {{price.tick}}
+    </div>
+    <div class="col-md-2">
+        Source: {{source}}
+    </div>
+    <div class="col-md-2">
+        
+        <button class="btn btn-primary btn-xs" ng-click="enrichPrice(price)">Enrich</button>
+        <button class="btn btn-primary btn-xs" ng-click="informBack({thePrice: price})">Update</button>
+    </div>
+    
+    <small><i><ng-transclude></ng-transclude></i></small>
+    
+</div>

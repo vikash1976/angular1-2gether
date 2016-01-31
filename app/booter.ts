@@ -1,5 +1,7 @@
 /// <reference path="../typings/typescript/typescript.d.ts" />
 /// <reference path="../typings/angularjs/angular.d.ts" />
+/// <reference path="../typings/jquery/jquery.d.ts" />
+/// <reference path="./application.d.ts" />
 
 //import * as angular from 'angular';
 //import {UpgradeAdapter} from 'angular2/upgrade';
@@ -10,11 +12,14 @@ import {Adder} from './components/adder';
 import {adapter} from './adapter';
 import {NameServiceA2} from './components/name.service';
 
-console.log(adapter['yuhi']);
-export let appModule = angular
-    .module('app', []);
+//import application = require('application');
+
+//console.log(application);
+var appModule = application.appModule;
+//angular.module('app', []);
     
-    appModule.controller('MainController', function(nameService, NameServiceA2){
+    
+    appModule.controller('MainController', function(nameService, NameServiceA2, $log){
         this.message = "AngularJS 1 and 2 co-existing, consuming each others features, Typscript and SystemJs";
         this.hero = {name: 'VP', id: 707};
         this.simple = "A Message from Angular1 to "; // a simple text to A2 component
@@ -35,6 +40,35 @@ export let appModule = angular
         
         this.myFullName = nameService.getFullName(); // consuming A1 service
         this.myFullNameFromA2 = NameServiceA2.getFormalFullName(); //consuming A2 service
+        
+        this.prices = [
+        {
+            price: 122.9,
+            tick: 'TCS',
+            prevClosePrice: 129.7
+        },
+        {
+            price: 142.3,
+            tick: 'RIL',
+            prevClosePrice: 139.7
+        },
+        {
+            price: 222.05,
+            tick: 'LnT',
+            prevClosePrice: 229.7
+        }
+    ];
+    this.fromModerateDirective = function(price){
+        $log.info('Moderate Directive called back with updates...'+ JSON.stringify(price));
+        $log.info('Scope Prices...'+ JSON.stringify(this.prices));
+        this.price = price.price; //to see in case of child scope to directive: child to parent - no impact but parent to child impacts
+        
+        this.justCall();
+    };
+    
+    this.justCall = function(){
+        console.log('Called');
+    }
     });
     
 //downgraded A2's components as directive
